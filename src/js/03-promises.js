@@ -38,17 +38,11 @@ function newPromises() {
   for (let i = 0; i < amount; i++) {
     createPromise(i + 1, delay + i * step)
       .then(({ position, delay }) => {
-        if (position > amount) {
-          // button.removeAttribute('disabled', '');
-        }
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
         );
       })
       .catch(({ position, delay }) => {
-        if (position > amount) {
-          // button.removeAttribute('disabled', '');
-        }
         Notiflix.Notify.failure(
           `❌ Rejected promise ${position} in ${delay}ms`
         );
