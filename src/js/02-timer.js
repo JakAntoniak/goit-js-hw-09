@@ -25,16 +25,14 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-// Add 0 to one-digit numbers and convert to string
+
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-// When start button is pressed
 function handleStart(e) {
   let timeEnd = new Date(input.value).getTime();
 
-  //clear previous timer if any is running
   clearInterval(timer);
 
   timer = setInterval(() => {
@@ -42,11 +40,9 @@ function handleStart(e) {
     let timeLeft = convertMs(timeEnd - timestart);
 
     if (timeEnd - timestart <= 0) {
-      //if countdown goes below 0 stop the timer
       clearInterval(timer);
       Notiflix.Notify.success('Timer Reached 0!');
     } else {
-      //keep updating the timer
       daysLeft.textContent = addLeadingZero(timeLeft.days);
       hoursLeft.textContent = addLeadingZero(timeLeft.hours);
       minutesLeft.textContent = addLeadingZero(timeLeft.minutes);
@@ -56,20 +52,18 @@ function handleStart(e) {
 }
 
 const options = {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      if (selectedDates[0] > Date.now()) {
-        console.log(selectedDates[0]);
-        startButton.removeAttribute('disabled');
-      } else {
-        startButton.setAttribute('disabled', '');
-        // Notiflix.Notify.failure('Please choose a date in the future');
-      }
-    },
-  };
-  
-  flatpickr('#datetime-picker', options);
-  
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (selectedDates[0] > Date.now()) {
+      console.log(selectedDates[0]);
+      startButton.removeAttribute('disabled');
+    } else {
+      startButton.setAttribute('disabled', '');
+    }
+  },
+};
+
+flatpickr('#datetime-picker', options);
